@@ -2,24 +2,28 @@
 namespace frontend\controllers;
 
 use Yii;
-use yii\base\InvalidArgumentException;
-use yii\web\BadRequestHttpException;
-use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use yii\base\InvalidParamException;
+use yii\web\BadRequestHttpException;
+use yii\web\Controller;
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use backend\models\StudyCourse;
+use frontend\models\QqConnect;
 
 /**
  * Site controller
  */
 class SiteController extends Controller
 {
+    public $modalContent;
+
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function behaviors()
     {
@@ -50,7 +54,7 @@ class SiteController extends Controller
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function actions()
     {
@@ -72,8 +76,30 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        ##qqLogin
+        $qqLogin = \frontend\models\SignupForm::dealQqLogin();
+        if($qqLogin) return $this->goHome();
+
+	    $modalContent = <<< HTML
+<form class="bs-example bs-example-form" role="form" name="bind-email" id="bind-email"><div class="input-group"><span class="input-group-addon">@</span><input type="text" class="form-control" id="email" name="eamil" placeholder="您的邮箱"></div></form>
+HTML;
+
+        $tagId = Yii::$app->request->get('tagId');
+	    $type  = Yii::$app->request->get('type');
+	
+	    if(isset($type)){
+                #Yii::$app->controller->action->id = 'course:'.$type;
+            }
+
+        $courses = StudyCourse::getCourseList($type, StudyCourse::PAGE_SIZE, $tagId);
+
+        return $this->render('index', [
+            'courses' => $courses,
+	        'isBindEmail' => \frontend\models\BaseModel::isBindEmail(),
+            'modalContent' => \frontend\models\BaseModel::getModal('为方便通知您，请绑定您的邮箱', $modalContent)
+        ]);
     }
+
 
     /**
      * Logs in a user.
@@ -82,7 +108,7 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
+        if (!\Yii::$app->user->isGuest) {
             return $this->goHome();
         }
 
@@ -90,8 +116,6 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         } else {
-            $model->password = '';
-
             return $this->render('login', [
                 'model' => $model,
             ]);
@@ -122,7 +146,7 @@ class SiteController extends Controller
             if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
                 Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
             } else {
-                Yii::$app->session->setFlash('error', 'There was an error sending your message.');
+                Yii::$app->session->setFlash('error', 'There was an error sending email.');
             }
 
             return $this->refresh();
@@ -150,6 +174,7 @@ class SiteController extends Controller
      */
     public function actionSignup()
     {
+        
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
@@ -178,7 +203,7 @@ class SiteController extends Controller
 
                 return $this->goHome();
             } else {
-                Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for the provided email address.');
+                Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for email provided.');
             }
         }
 
@@ -198,12 +223,12 @@ class SiteController extends Controller
     {
         try {
             $model = new ResetPasswordForm($token);
-        } catch (InvalidArgumentException $e) {
+        } catch (InvalidParamException $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-            Yii::$app->session->setFlash('success', 'New password saved.');
+            Yii::$app->session->setFlash('success', 'New password was saved.');
 
             return $this->goHome();
         }

@@ -16,9 +16,8 @@ class ContactForm extends Model
     public $body;
     public $verifyCode;
 
-
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function rules()
     {
@@ -33,20 +32,24 @@ class ContactForm extends Model
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function attributeLabels()
     {
         return [
-            'verifyCode' => 'Verification Code',
+            'name' => '姓名',
+            'email' => '邮箱',
+            'subject' => '简介',
+            'body' => '详情',
+            'verifyCode' => '验证码',
         ];
     }
 
     /**
      * Sends an email to the specified email address using the information collected by this model.
      *
-     * @param string $email the target email address
-     * @return bool whether the email was sent
+     * @param  string  $email the target email address
+     * @return boolean whether the email was sent
      */
     public function sendEmail($email)
     {
