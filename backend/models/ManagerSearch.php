@@ -41,11 +41,20 @@ class ManagerSearch extends Manager
      */
     public function search($params)
     {
-        $query = Manager::find();
+        
+	if(\Yii::$app->user->identity['role'] == '超级管理员'){
+            $query = Manager::find()->leftJoin('organization',"organization.org_id=manager.branch");
+        }else{
+            $query = Manager::find()->leftJoin('organization',"organization.org_id=manager.branch")->where(['id' => \Yii::$app->user->identity['id']]);
+        }
+
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $parentPath = \backend\models\Organization::getManagerBranchPath();
+        $query->andFilterWhere(['like','parent_path',$parentPath]);
         
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;

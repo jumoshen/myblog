@@ -140,7 +140,7 @@ $this->title = 'blog_of_jumoshen';
         <div class="container">
             <div class="friendly-link">
                 <span>友情链接：</span>
-                <?php foreach((new \backend\models\Blogroll())->getBlogrolls() as $blogroll):?>
+		<?php foreach((new \backend\models\Blogroll())->getBlogrolls() as $blogroll):?>
                     <a href="<?= $blogroll['link']; ?>" target="_blank" title="<?= $blogroll['web_name']; ?>"><?= $blogroll['web_name']; ?></a>
                 <?php endforeach ?>
             </div>
