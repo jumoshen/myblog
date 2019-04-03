@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?php ActiveForm::end(); ?>
 	    <div class="panel-body">
-                 <a href="<?= Url::to(['user/qq-login'])?>" target="__block"><img src="http://zf.blogfamily.ren/public/public/images/qq_login.png" width="32" alt="使用腾讯QQ账号登录" title="腾讯QQ账号登录"></a>
+                 <a href="<?= Url::to(['user/qq-login'])?>" target="__block"><img src="./images/qq_login.png" width="32" alt="使用腾讯QQ账号登录" title="腾讯QQ账号登录"></a>
             </div>
         </div>
     </div>
