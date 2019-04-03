@@ -18,23 +18,22 @@ use backend\models\Mynote;
 
     <div class="form-inline form-group">
 
-    <?= $form->field($model, 'title')->widget('yii\jui\AutoComplete',[
-
-        'options'=>['class'=>'form-control','placeholder'=>'请输入标题'],
-
-        'clientOptions'=>[
-            'source'=> Mynote::myNotesArray()
-        ]
-    ]) ?>
+    <?= $form->field($model, 'title')->widget(\kartik\typeahead\Typeahead::className(), [
+        'dataset' => [
+            [
+                'local' => Mynote::myNotesArray(),
+                'limit' => 10
+            ]
+        ],
+        'pluginOptions' => ['highlight' => true],
+        'options' => ['placeholder' => 'Filter as you type ...'],
+    ])?>
 
     <?= $form->field($model, 'link') ?>
 
-    <?= $form->field($model, 'create_at')->widget(\yii\jui\DatePicker::classname(), [
+    <?= $form->field($model, 'create_at')->widget(\kartik\date\DatePicker::className(), [
         //'language' => 'ru',
-        'dateFormat' => 'yyyy-MM-dd',
-        'options' => [
-            'class' => 'form-control'
-        ],
+        'pluginOptions' => ['dateFormat' => 'yyyy-MM-dd',]
     ]) ?>
 
     <?php // echo $form->field($model, 'author') ?>
