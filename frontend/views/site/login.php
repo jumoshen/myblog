@@ -44,6 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <div style="color:#999;margin:1em 0">
                     忘记密码 <?= Html::a('请点击', ['site/request-password-reset']) ?>.
+                    <a href="<?= Url::to(['user/qq-login'])?>" target="__block"><img width="70px" src="http://www.jumoshen.cn/images/logo/qq_login.png" alt="使用腾讯QQ账号登录" title="腾讯QQ账号登录"></a>
                 </div>
 
                 <div class="form-group">
@@ -52,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?php ActiveForm::end(); ?>
 	    <div class="panel-body">
-                 <a href="<?= Url::to(['user/qq-login'])?>" target="__block"><img src="http://www.jumoshen.cn/images/logo/qq_login.png" width="32" alt="使用腾讯QQ账号登录" title="腾讯QQ账号登录"></a>
+
             </div>
         </div>
     </div>
