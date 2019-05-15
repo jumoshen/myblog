@@ -13,8 +13,8 @@ return [
         'db' => [
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=127.0.0.1;dbname=myblog',
-            'username' => 'lianghui',
-            'password' => 'lh951121',
+            'username' => '',
+            'password' => '',
             'charset' => 'utf8',
             'enableSchemaCache' => false,
 
@@ -27,8 +27,8 @@ return [
 	'noteDb' => [
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=127.0.0.1;dbname=myNote',
-            'username' => 'lianghui',
-            'password' => 'lh951121',
+            'username' => '',
+            'password' => '',
             'charset' => 'utf8',
             'enableSchemaCache' => false,
 
@@ -45,15 +45,10 @@ return [
                 'transport' => [
                     'class' => 'Swift_SmtpTransport',
                     'host' => 'smtp.qq.com',
-		    'username' => '1173240549@qq.com',
-                   # 'password' => 'yuqfukrowfocdjhb',
-		    'password' => 'mstheiicudpchgdf',
+		    'username' => '',
+		    'password' => '',
                     'port' => '465',
-                    'encryption' => 'ssl',  
-                   // 'username' => 'service@weisi360.com',
-                   // 'password' => 'weisi2014',
-                    //'port' => '25',
-                    //'encryption' => 'ssl',   
+                    'encryption' => 'ssl'
                 ],
         ],
         'redis' => [
