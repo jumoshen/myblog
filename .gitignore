@@ -47,3 +47,6 @@ phpunit.phar
 /backend/web/uploads/
 /frontend/web/public/video-release.apk
 frontend/web/uploads/
+
+/common/config/params.php
+/common/config/main.php
