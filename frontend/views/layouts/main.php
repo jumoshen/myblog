@@ -102,7 +102,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; Blog of Jumoshen <?= date('Y') ?>&nbsp;<a src="https://beian.miit.gov.cn">京ICP备16019475号-1</a></p>
+        <p class="pull-left">&copy; Blog of Jumoshen <?= date('Y') ?>&nbsp;<a href="https://beian.miit.gov.cn">京ICP备16019475号-1</a></p>
 	<p class="pull-right">
 	    <!--<img class="img-responsive" height="40px"  src="https://s11.flagcounter.com/count2/CM9Y/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0">-->
 	</p>
