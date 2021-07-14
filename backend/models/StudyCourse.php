@@ -52,6 +52,8 @@ class StudyCourse extends \yii\db\ActiveRecord
 
     const TYPE_OF_PYTHON = 5;
 
+    const TYPE_OF_GOLANG = 6;
+
     const PAGE_SIZE = 5;
 
     public $tags;
@@ -147,6 +149,7 @@ class StudyCourse extends \yii\db\ActiveRecord
             self::TYPE_OF_LINUX => 'LINUX',
             self::TYPE_OF_DCJ   => 'DIV&CSS&JS',
             self::TYPE_OF_PYTHON => 'PYTHON',
+            self::TYPE_OF_GOLANG => 'GOLANG',
             self::TYPE_OF_OTHER => '其他'
         );
 	if($isReal) unset($courseTypes['']);
