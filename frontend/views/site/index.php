@@ -34,7 +34,7 @@ $this->title = 'blog_of_jumoshen';
     $this->registerJsFile('/js/slider-play/wowslider.js',['depends' => [\yii\web\JqueryAsset::className()]]);
     $this->registerJsFile('/js/slider-play/script.js',['depends' => [\yii\web\JqueryAsset::className()]]);
     $this->registerJsFile('/js/slider-play/jquery.js',['depends' => [\yii\web\JqueryAsset::className()]]);
-    $this->registerJsFile('/js/live2d/L2Dwidget.min.js',['depends' => [\yii\web\JqueryAsset::className()]]);
+  //  $this->registerJsFile('/js/live2d/L2Dwidget.min.js',['depends' => [\yii\web\JqueryAsset::className()]]);
 
  ?>
  <div class="row">
@@ -200,30 +200,30 @@ if(!$isBindEmail){
     $this->registerJs($js);
 }
 
-$live2DJs = <<< LIVE2D
- L2Dwidget.init({
-    model: {
-      jsonPath: '/js/live2d/tororo/assets/tororo.model.json',
-    },
-    display: {
-      superSample: 2,
-      width: 80,
-      height: 80,
-      position: 'right',
-      hOffset: 0,
-      vOffset: 0,
-    },
-    mobile: {
-      show: true,
-      scale: 1,
-      motion: true,
-    },
-    react: {
-      opacityDefault: 0.8,
-      opacityOnHover: 0.2,
-    }
-  })
-LIVE2D;
+//$live2DJs = <<< LIVE2D
+// L2Dwidget.init({
+//    model: {
+//      jsonPath: '/js/live2d/tororo/assets/tororo.model.json',
+//    },
+//    display: {
+//      superSample: 2,
+//      width: 80,
+//      height: 80,
+//      position: 'right',
+//      hOffset: 0,
+//      vOffset: 0,
+//    },
+//    mobile: {
+ //     show: true,
+   //   scale: 1,
+    //  motion: true,
+    //},
+   // react: {
+    //  opacityDefault: 0.8,
+     // opacityOnHover: 0.2,
+  //  }
+ // })
+//LIVE2D;
 
-$this->registerJs($live2DJs);
+//$this->registerJs($live2DJs);
 ?>
